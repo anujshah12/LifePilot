@@ -1,0 +1,323 @@
+================================================================================
+                          LIFEPILOT - REQUIREMENTS DOC
+                        Personal Time Management iOS App
+================================================================================
+
+Created: 2026-02-13
+Author: Anuj
+Status: Planning Phase
+
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
+
+LifePilot is a personal iOS app that manages your entire day through two core
+systems: a sequential daily to-do list (tasks must be completed in order) and
+a time-tracking calendar that visualizes where your time went at the end of
+each week.
+
+Target User: Single user (you), no accounts or login needed.
+Platform: Native iOS (iPhone)
+Data Storage: On-device only (SwiftData)
+
+================================================================================
+2. CORE FEATURES
+================================================================================
+
+----------------------
+2.1  SEQUENTIAL TASK LIST
+----------------------
+
+- Tasks are presented one at a time in a strict sequence.
+- The next task is LOCKED and cannot be accessed until the current task is
+  marked as complete.
+- Between tasks are "work time pockets" — blocks of time estimated per task.
+  You assign an estimated duration to each task, and the app calculates your
+  work blocks and expected schedule from those estimates.
+- Each task has:
+    * Title
+    * Description (optional)
+    * Estimated duration (minutes)
+    * Custom category (user-defined)
+    * Completion status
+    * Actual time spent (tracked automatically)
+
+----------------------
+2.2  DAILY TEMPLATES
+----------------------
+
+- Users can create reusable daily templates (e.g., "Weekday Routine",
+  "Weekend", "Gym Day").
+- A template contains a pre-ordered list of tasks with default durations.
+- Each morning, you load a template and can add, remove, or reorder tasks
+  before starting.
+- Templates are saved on-device and can be edited anytime.
+
+----------------------
+2.3  START MY DAY
+----------------------
+
+- The day does NOT auto-start. You tap a "Start My Day" button when ready.
+- This begins the clock — the app starts tracking time from this moment.
+- The first task in the sequence becomes active.
+- When you complete a task, the app logs the actual time spent and unlocks
+  the next task.
+- The day ends when all tasks are complete or you manually end it.
+
+----------------------
+2.4  TIME TRACKING (CALENDAR)
+----------------------
+
+- Every minute of your day (from "Start My Day" to end) is tracked and
+  assigned to a category.
+- Time is automatically logged based on which task you're working on.
+- Custom categories are fully user-defined (e.g., "Deep Work", "Gym",
+  "Cooking", "Reading", "Errands" — whatever you want).
+- Categories can be created, renamed, color-coded, and deleted at any time.
+- Historical data is preserved even if a category is later deleted.
+
+----------------------
+2.5  WEEKLY VISUALIZATION DASHBOARD
+----------------------
+
+At the end of each week, the app generates a dashboard with:
+
+  a) CATEGORY BREAKDOWN
+     - Pie chart or bar chart showing total hours per category.
+     - Percentage of total tracked time per category.
+
+  b) DAILY TIMELINE
+     - Hour-by-hour color-coded view of each day.
+     - Shows what you were doing at any point in the day.
+     - Scrollable across the 7 days of the week.
+
+  c) COMPLETION STATS
+     - Total tasks completed vs. planned.
+     - Estimated time vs. actual time (accuracy tracking).
+     - Current streak (consecutive days where all tasks were completed).
+     - Productivity score (a simple metric based on completion rate and
+       time accuracy).
+
+  d) TRENDS (stretch goal)
+     - Week-over-week comparison.
+     - Category trends over time (are you spending more or less on X?).
+
+----------------------
+2.6  PUSH NOTIFICATIONS
+----------------------
+
+- Reminder when it's time to start the day (configurable time).
+- Alert when the estimated time for the current task is up.
+- Nudge if no task has been completed in a while.
+- End-of-day summary notification.
+- Weekly report ready notification.
+
+================================================================================
+3. USER EXPERIENCE FLOW
+================================================================================
+
+  1. EVENING BEFORE (or morning of):
+     - Open app -> Select a template or build a task list from scratch.
+     - Reorder tasks, adjust durations, assign categories.
+     - Save the plan for tomorrow (or today).
+
+  2. MORNING:
+     - Open app -> See today's plan.
+     - Tap "Start My Day" -> Timer begins, first task activates.
+
+  3. THROUGHOUT THE DAY:
+     - Complete current task -> Mark done -> Next task unlocks.
+     - App tracks actual time per task automatically.
+     - Push notifications keep you on track.
+
+  4. END OF DAY:
+     - All tasks done (or manually end day).
+     - Quick daily summary shown.
+
+  5. END OF WEEK:
+     - Full dashboard with charts, timelines, and stats.
+     - Review where your time actually went.
+
+================================================================================
+4. DATA MODEL (HIGH LEVEL)
+================================================================================
+
+  Task
+  ----
+  - id: UUID
+  - title: String
+  - description: String?
+  - estimatedMinutes: Int
+  - actualMinutes: Int?
+  - category: Category
+  - order: Int
+  - isComplete: Bool
+  - startedAt: Date?
+  - completedAt: Date?
+
+  Category
+  --------
+  - id: UUID
+  - name: String
+  - color: String (hex code)
+
+  DayPlan
+  -------
+  - id: UUID
+  - date: Date
+  - tasks: [Task] (ordered)
+  - startedAt: Date?
+  - endedAt: Date?
+
+  Template
+  --------
+  - id: UUID
+  - name: String
+  - tasks: [TemplateTask] (ordered, same as Task but no completion data)
+
+  WeeklyReport
+  -------------
+  - id: UUID
+  - weekStartDate: Date
+  - dayPlans: [DayPlan]
+  - Generated/computed on the fly from DayPlan data
+
+================================================================================
+5. TECH STACK & TOOLS
+================================================================================
+
+  LANGUAGE & FRAMEWORK
+  --------------------
+  - Swift (latest stable version)
+  - SwiftUI (for all UI — declarative, modern, beginner-friendly)
+  - Xcode (Apple's IDE — required for iOS development)
+
+  DATA PERSISTENCE
+  ----------------
+  - SwiftData (Apple's native persistence framework, successor to Core Data)
+    * On-device only, no server
+    * Integrates seamlessly with SwiftUI
+    * Handles relationships (Task <-> Category, DayPlan <-> Tasks, etc.)
+
+  CHARTS & VISUALIZATION
+  ----------------------
+  - Swift Charts (Apple's native charting framework, built into SwiftUI)
+    * Bar charts, pie charts, line charts — all built in
+    * No third-party dependency needed
+
+  NOTIFICATIONS
+  -------------
+  - UserNotifications framework (Apple's built-in push/local notification system)
+    * These are LOCAL notifications (no server needed)
+    * Schedule notifications based on task timers and day start time
+
+  ARCHITECTURE
+  ------------
+  - MVVM (Model-View-ViewModel)
+    * Standard pattern for SwiftUI apps
+    * Models = SwiftData entities (Task, Category, DayPlan, Template)
+    * ViewModels = Business logic (task sequencing, time tracking, stats)
+    * Views = SwiftUI screens
+
+  VERSION CONTROL
+  ---------------
+  - Git + GitHub (track your progress, back up your code)
+
+  TESTING
+  -------
+  - XCTest (built-in unit testing)
+  - SwiftUI Previews (visual testing of UI components)
+
+================================================================================
+6. TOOLS YOU NEED TO INSTALL / SET UP
+================================================================================
+
+  REQUIRED (before you start coding)
+  -----------------------------------
+  [x] Mac computer (you have this)
+  [ ] Xcode (free from Mac App Store — this is your entire dev environment)
+  [ ] Apple Developer Account — FREE tier lets you run on your own device
+      * Paid ($99/year) only needed if you want App Store distribution
+  [ ] iPhone (or use the Xcode Simulator to start)
+
+  RECOMMENDED
+  -----------
+  [ ] SF Symbols app (free from Apple — browse icons for your UI)
+  [ ] Git initialized in the project folder
+
+================================================================================
+7. DEVELOPMENT PHASES
+================================================================================
+
+  PHASE 1 — Foundation (Learn + Build Basics)
+  --------------------------------------------
+  - Set up Xcode project with SwiftUI
+  - Learn SwiftUI basics (views, navigation, state management)
+  - Create the data models with SwiftData
+  - Build a simple task list screen (add, view, delete tasks)
+
+  PHASE 2 — Core Task System
+  ---------------------------
+  - Implement sequential task locking (strict order enforcement)
+  - Build "Start My Day" flow with timer
+  - Track actual time per task (start/stop timestamps)
+  - Build task completion flow (mark done -> unlock next)
+
+  PHASE 3 — Templates
+  --------------------
+  - Create/edit/delete daily templates
+  - Load a template into a new day plan
+  - Allow editing tasks after loading a template
+
+  PHASE 4 — Categories & Time Tracking
+  -------------------------------------
+  - Custom category CRUD (create, rename, color-pick, delete)
+  - Assign categories to tasks
+  - Accumulate time data per category per day
+
+  PHASE 5 — Visualization Dashboard
+  ----------------------------------
+  - Weekly category breakdown chart (Swift Charts)
+  - Daily hour-by-hour timeline view
+  - Completion stats (tasks done, streaks, accuracy)
+  - Productivity score calculation
+
+  PHASE 6 — Notifications
+  ------------------------
+  - Morning reminder to start the day
+  - Task timer alerts
+  - Inactivity nudges
+  - Daily and weekly summary notifications
+
+  PHASE 7 — Polish
+  -----------------
+  - Animations and transitions
+  - Dark mode support
+  - Onboarding flow (first-time setup of categories)
+  - Edge cases (app backgrounding, midnight rollover, etc.)
+
+================================================================================
+8. KEY CONSTRAINTS & DECISIONS
+================================================================================
+
+  - NO backend / server — everything lives on the device.
+  - NO user accounts — single user, no auth.
+  - NO third-party dependencies (for now) — use only Apple frameworks.
+  - Data does NOT sync across devices (on-device only).
+  - The app is for personal use, not App Store distribution (for now).
+  - New to iOS development — code should be clean, well-commented, and
+    follow standard Swift/SwiftUI conventions to aid learning.
+
+================================================================================
+9. STRETCH GOALS (FUTURE)
+================================================================================
+
+  - iCloud sync (back up data, use across iPhone + iPad)
+  - Widget for home screen (show current task + timer)
+  - Apple Watch companion (quick task completion from wrist)
+  - Siri Shortcuts integration ("Hey Siri, start my day")
+  - Export weekly reports as PDF
+  - Week-over-week trend analysis
+  - Habit tracking layer on top of task system
+
+================================================================================
