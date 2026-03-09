@@ -9,64 +9,32 @@
 /* Begin PBXBuildFile section */
 		D00000000000000000000001 /* LifePilotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000001; };
 		D00000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000002; };
-		D00000000000000000000003 /* DayPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000003; };
-		D00000000000000000000004 /* DayTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000004; };
-		D00000000000000000000005 /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000005; };
-		D00000000000000000000006 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000006; };
-		D00000000000000000000007 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000007; };
-		D00000000000000000000008 /* TemplateTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008; };
-		D00000000000000000000009 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000009; };
-		D0000000000000000000000A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000A; };
-		D0000000000000000000000B /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000B; };
-		D0000000000000000000000C /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000C; };
-		D0000000000000000000000D /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000D; };
-		D0000000000000000000000E /* TemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000E; };
-		D0000000000000000000000F /* WeeklyReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000F; };
-		D00000000000000000000010 /* CategoryManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000010; };
-		D00000000000000000000011 /* ColorPickerGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000011; };
-		D00000000000000000000012 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000012; };
-		D00000000000000000000013 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000013; };
-		D00000000000000000000014 /* WeeklyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000014; };
-		D00000000000000000000015 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000015; };
-		D00000000000000000000016 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000016; };
-		D00000000000000000000017 /* TemplateEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000017; };
-		D00000000000000000000018 /* TemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000018; };
-		D00000000000000000000019 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000019; };
-		D0000000000000000000001A /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000001A; };
-		D0000000000000000000001B /* FocusSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000001B; };
-		D0000000000000000000001C /* FocusSoundPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000001C; };
+		D00000000000000000000003 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000003; };
+		D00000000000000000000004 /* HabitCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000004; };
+		D00000000000000000000005 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000005; };
+		D00000000000000000000006 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000006; };
+		D00000000000000000000007 /* HabitEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000007; };
+		D00000000000000000000008 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008; };
+		D00000000000000000000009 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000009; };
+		D0000000000000000000000A /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000A; };
+		D0000000000000000000000B /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000B; };
+		D0000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000C; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C00000000000000000000001 /* LifePilotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePilotApp.swift; sourceTree = "<group>"; };
 		C00000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C00000000000000000000003 /* DayPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPlan.swift; sourceTree = "<group>"; };
-		C00000000000000000000004 /* DayTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTask.swift; sourceTree = "<group>"; };
-		C00000000000000000000005 /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
-		C00000000000000000000006 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
-		C00000000000000000000007 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
-		C00000000000000000000008 /* TemplateTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateTask.swift; sourceTree = "<group>"; };
-		C00000000000000000000009 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
-		C0000000000000000000000A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		C0000000000000000000000B /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
-		C0000000000000000000000C /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
-		C0000000000000000000000D /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
-		C0000000000000000000000E /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
-		C0000000000000000000000F /* WeeklyReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReportViewModel.swift; sourceTree = "<group>"; };
-		C00000000000000000000010 /* CategoryManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagerView.swift; sourceTree = "<group>"; };
-		C00000000000000000000011 /* ColorPickerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerGrid.swift; sourceTree = "<group>"; };
-		C00000000000000000000012 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
-		C00000000000000000000013 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
-		C00000000000000000000014 /* WeeklyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyDashboardView.swift; sourceTree = "<group>"; };
-		C00000000000000000000015 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
-		C00000000000000000000016 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
-		C00000000000000000000017 /* TemplateEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateEditorView.swift; sourceTree = "<group>"; };
-		C00000000000000000000018 /* TemplateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListView.swift; sourceTree = "<group>"; };
-		C00000000000000000000019 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C00000000000000000000003 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		C00000000000000000000004 /* HabitCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletion.swift; sourceTree = "<group>"; };
+		C00000000000000000000005 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		C00000000000000000000006 /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
+		C00000000000000000000007 /* HabitEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditorSheet.swift; sourceTree = "<group>"; };
+		C00000000000000000000008 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		C00000000000000000000009 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
+		C0000000000000000000000A /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		C0000000000000000000000B /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		C0000000000000000000000C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0000000000000000000000C /* LifePilot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifePilot.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0000000000000000000001A /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
-		C0000000000000000000001B /* FocusSoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSoundManager.swift; sourceTree = "<group>"; };
-		C0000000000000000000001C /* FocusSoundPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSoundPickerSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +70,9 @@
 				C00000000000000000000001 /* LifePilotApp.swift */,
 				C00000000000000000000002 /* ContentView.swift */,
 				B00000000000000000000002 /* Models */,
-				B00000000000000000000003 /* ViewModels */,
-				B00000000000000000000004 /* Views */,
-				B00000000000000000000005 /* Utilities */,
-				C00000000000000000000019 /* Assets.xcassets */,
+				B00000000000000000000003 /* Views */,
+				B00000000000000000000004 /* Utilities */,
+				C0000000000000000000000C /* Assets.xcassets */,
 			);
 			path = LifePilot;
 			sourceTree = "<group>";
@@ -113,94 +80,31 @@
 		B00000000000000000000002 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C00000000000000000000003 /* DayPlan.swift */,
-				C00000000000000000000004 /* DayTask.swift */,
-				C00000000000000000000005 /* TaskCategory.swift */,
-				C00000000000000000000006 /* TaskItem.swift */,
-				C00000000000000000000007 /* Template.swift */,
-				C00000000000000000000008 /* TemplateTask.swift */,
+				C00000000000000000000003 /* Habit.swift */,
+				C00000000000000000000004 /* HabitCompletion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B00000000000000000000003 /* ViewModels */ = {
+		B00000000000000000000003 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0000000000000000000000C /* DayViewModel.swift */,
-				C0000000000000000000000D /* TaskListViewModel.swift */,
-				C0000000000000000000000E /* TemplateViewModel.swift */,
-				C0000000000000000000000F /* WeeklyReportViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		B00000000000000000000004 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B00000000000000000000006 /* Components */,
-				B00000000000000000000007 /* Dashboard */,
-				B00000000000000000000008 /* StartMyDay */,
-				B00000000000000000000009 /* TaskList */,
-				B0000000000000000000000A /* Templates */,
+				C00000000000000000000005 /* TodayView.swift */,
+				C00000000000000000000006 /* HabitListView.swift */,
+				C00000000000000000000007 /* HabitEditorSheet.swift */,
+				C00000000000000000000008 /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B00000000000000000000005 /* Utilities */ = {
+		B00000000000000000000004 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				C00000000000000000000009 /* Color+Hex.swift */,
-				C0000000000000000000001B /* FocusSoundManager.swift */,
-				C0000000000000000000000A /* NotificationManager.swift */,
-				C0000000000000000000001A /* QuoteService.swift */,
-				C0000000000000000000000B /* TimeFormatter.swift */,
+				C0000000000000000000000B /* Color+Hex.swift */,
+				C00000000000000000000009 /* QuoteService.swift */,
+				C0000000000000000000000A /* SoundManager.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		B00000000000000000000006 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				C00000000000000000000010 /* CategoryManagerView.swift */,
-				C00000000000000000000011 /* ColorPickerGrid.swift */,
-				C0000000000000000000001C /* FocusSoundPickerSheet.swift */,
-				C00000000000000000000012 /* NotificationSettingsView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		B00000000000000000000007 /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				C00000000000000000000013 /* DayDetailView.swift */,
-				C00000000000000000000014 /* WeeklyDashboardView.swift */,
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
-		B00000000000000000000008 /* StartMyDay */ = {
-			isa = PBXGroup;
-			children = (
-				C00000000000000000000015 /* TodayView.swift */,
-			);
-			path = StartMyDay;
-			sourceTree = "<group>";
-		};
-		B00000000000000000000009 /* TaskList */ = {
-			isa = PBXGroup;
-			children = (
-				C00000000000000000000016 /* TaskListView.swift */,
-			);
-			path = TaskList;
-			sourceTree = "<group>";
-		};
-		B0000000000000000000000A /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				C00000000000000000000017 /* TemplateEditorView.swift */,
-				C00000000000000000000018 /* TemplateListView.swift */,
-			);
-			path = Templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D00000000000000000000019 /* Assets.xcassets in Resources */,
+				D0000000000000000000000C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,31 +178,15 @@
 			files = (
 				D00000000000000000000001 /* LifePilotApp.swift in Sources */,
 				D00000000000000000000002 /* ContentView.swift in Sources */,
-				D00000000000000000000003 /* DayPlan.swift in Sources */,
-				D00000000000000000000004 /* DayTask.swift in Sources */,
-				D00000000000000000000005 /* TaskCategory.swift in Sources */,
-				D00000000000000000000006 /* TaskItem.swift in Sources */,
-				D00000000000000000000007 /* Template.swift in Sources */,
-				D00000000000000000000008 /* TemplateTask.swift in Sources */,
-				D00000000000000000000009 /* Color+Hex.swift in Sources */,
-				D0000000000000000000000A /* NotificationManager.swift in Sources */,
-				D0000000000000000000000B /* TimeFormatter.swift in Sources */,
-				D0000000000000000000000C /* DayViewModel.swift in Sources */,
-				D0000000000000000000000D /* TaskListViewModel.swift in Sources */,
-				D0000000000000000000000E /* TemplateViewModel.swift in Sources */,
-				D0000000000000000000000F /* WeeklyReportViewModel.swift in Sources */,
-				D00000000000000000000010 /* CategoryManagerView.swift in Sources */,
-				D00000000000000000000011 /* ColorPickerGrid.swift in Sources */,
-				D00000000000000000000012 /* NotificationSettingsView.swift in Sources */,
-				D00000000000000000000013 /* DayDetailView.swift in Sources */,
-				D00000000000000000000014 /* WeeklyDashboardView.swift in Sources */,
-				D00000000000000000000015 /* TodayView.swift in Sources */,
-				D00000000000000000000016 /* TaskListView.swift in Sources */,
-				D00000000000000000000017 /* TemplateEditorView.swift in Sources */,
-				D00000000000000000000018 /* TemplateListView.swift in Sources */,
-				D0000000000000000000001A /* QuoteService.swift in Sources */,
-				D0000000000000000000001B /* FocusSoundManager.swift in Sources */,
-				D0000000000000000000001C /* FocusSoundPickerSheet.swift in Sources */,
+				D00000000000000000000003 /* Habit.swift in Sources */,
+				D00000000000000000000004 /* HabitCompletion.swift in Sources */,
+				D00000000000000000000005 /* TodayView.swift in Sources */,
+				D00000000000000000000006 /* HabitListView.swift in Sources */,
+				D00000000000000000000007 /* HabitEditorSheet.swift in Sources */,
+				D00000000000000000000008 /* StatsView.swift in Sources */,
+				D00000000000000000000009 /* QuoteService.swift in Sources */,
+				D0000000000000000000000A /* SoundManager.swift in Sources */,
+				D0000000000000000000000B /* Color+Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,46 +1,19 @@
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-
     var body: some View {
         TabView {
-            Tab("Today", systemImage: "sun.max.fill") {
+            Tab("Today", systemImage: "checkmark.circle.fill") {
                 TodayView()
             }
 
-            Tab("Templates", systemImage: "doc.on.doc.fill") {
-                TemplateListView()
+            Tab("Habits", systemImage: "list.bullet") {
+                HabitListView()
             }
 
-            Tab("History", systemImage: "calendar") {
-                WeeklyDashboardView()
+            Tab("Stats", systemImage: "flame.fill") {
+                StatsView()
             }
-
-            Tab("Settings", systemImage: "gearshape.fill") {
-                SettingsView()
-            }
-        }
-    }
-}
-
-struct SettingsView: View {
-    var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink {
-                    CategoryManagerView()
-                } label: {
-                    Label("Categories", systemImage: "tag.fill")
-                }
-
-                NavigationLink {
-                    NotificationSettingsView()
-                } label: {
-                    Label("Notifications", systemImage: "bell.fill")
-                }
-            }
-            .navigationTitle("Settings")
         }
     }
 }

@@ -8,12 +8,8 @@ struct LifePilotApp: App {
             ContentView()
         }
         .modelContainer(for: [
-            TaskItem.self,
-            TaskCategory.self,
-            DayPlan.self,
-            DayTask.self,
-            Template.self,
-            TemplateTask.self
+            Habit.self,
+            HabitCompletion.self
         ])
     }
 }
