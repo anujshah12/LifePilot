@@ -7,21 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D00000000000000000000001 /* LifePilotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000001; };
-		D00000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000002; };
-		D00000000000000000000003 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000003; };
-		D00000000000000000000004 /* HabitCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000004; };
-		D00000000000000000000005 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000005; };
-		D00000000000000000000006 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000006; };
-		D00000000000000000000007 /* HabitEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000007; };
-		D00000000000000000000008 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008; };
-		D00000000000000000000009 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000009; };
-		D0000000000000000000000A /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000A; };
-		D0000000000000000000000B /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000B; };
-		D0000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000C; };
+		D00000000000000000000001 /* LifePilotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000001 /* LifePilotApp.swift */; };
+		D00000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000002 /* ContentView.swift */; };
+		D00000000000000000000003 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000003 /* Habit.swift */; };
+		D00000000000000000000004 /* HabitCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000004 /* HabitCompletion.swift */; };
+		D00000000000000000000005 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000005 /* TodayView.swift */; };
+		D00000000000000000000006 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000006 /* HabitListView.swift */; };
+		D00000000000000000000007 /* HabitEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000007 /* HabitEditorSheet.swift */; };
+		D00000000000000000000008 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000008 /* StatsView.swift */; };
+		D00000000000000000000009 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000009 /* QuoteService.swift */; };
+		D0000000000000000000000A /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000A /* SoundManager.swift */; };
+		D0000000000000000000000B /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000B /* Color+Hex.swift */; };
+		D0000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000C /* Assets.xcassets */; };
+		D0000000000000000000000D /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000D /* TodayViewModel.swift */; };
+		D0000000000000000000000E /* HabitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000E /* HabitListViewModel.swift */; };
+		D0000000000000000000000F /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000F /* StatsViewModel.swift */; };
+		E00000000000000000000005 /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000004 /* HabitTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E0000000000000000000000C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A00000000000000000000006;
+			remoteInfo = LifePilot;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A0000000000000000000000C /* LifePilot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifePilot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00000000000000000000001 /* LifePilotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePilotApp.swift; sourceTree = "<group>"; };
 		C00000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C00000000000000000000003 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
@@ -34,7 +49,11 @@
 		C0000000000000000000000A /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		C0000000000000000000000B /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		C0000000000000000000000C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A0000000000000000000000C /* LifePilot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifePilot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0000000000000000000000D /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		C0000000000000000000000E /* HabitListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListViewModel.swift; sourceTree = "<group>"; };
+		C0000000000000000000000F /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		E00000000000000000000002 /* LifePilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifePilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E00000000000000000000004 /* HabitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,13 +64,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E00000000000000000000007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A00000000000000000000002 /* root */ = {
+		A00000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000001 /* LifePilot */,
+				E00000000000000000000003 /* LifePilotTests */,
 				A0000000000000000000000D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				A0000000000000000000000C /* LifePilot.app */,
+				E00000000000000000000002 /* LifePilotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,7 +99,7 @@
 				C00000000000000000000002 /* ContentView.swift */,
 				B00000000000000000000002 /* Models */,
 				B00000000000000000000003 /* Views */,
-				B00000000000000000000004 /* Utilities */,
+				B00000000000000000000007 /* Extensions */,
 				C0000000000000000000000C /* Assets.xcassets */,
 			);
 			path = LifePilot;
@@ -82,6 +110,8 @@
 			children = (
 				C00000000000000000000003 /* Habit.swift */,
 				C00000000000000000000004 /* HabitCompletion.swift */,
+				B00000000000000000000005 /* ViewModels */,
+				B00000000000000000000006 /* Services */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,14 +127,39 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B00000000000000000000004 /* Utilities */ = {
+		B00000000000000000000005 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				C0000000000000000000000B /* Color+Hex.swift */,
+				C0000000000000000000000D /* TodayViewModel.swift */,
+				C0000000000000000000000E /* HabitListViewModel.swift */,
+				C0000000000000000000000F /* StatsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
 				C00000000000000000000009 /* QuoteService.swift */,
 				C0000000000000000000000A /* SoundManager.swift */,
 			);
-			path = Utilities;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000007 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0000000000000000000000B /* Color+Hex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000003 /* LifePilotTests */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000004 /* HabitTests.swift */,
+			);
+			path = LifePilotTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +182,23 @@
 			productReference = A0000000000000000000000C /* LifePilot.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E00000000000000000000001 /* LifePilotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E00000000000000000000008 /* Build configuration list for PBXNativeTarget "LifePilotTests" */;
+			buildPhases = (
+				E00000000000000000000006 /* Sources */,
+				E00000000000000000000007 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E0000000000000000000000B /* PBXTargetDependency */,
+			);
+			name = LifePilotTests;
+			productName = LifePilotTests;
+			productReference = E00000000000000000000002 /* LifePilotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -135,10 +207,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					A00000000000000000000006 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					E00000000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A00000000000000000000006;
 					};
 				};
 			};
@@ -150,12 +226,13 @@
 				en,
 				Base,
 			);
-			mainGroup = A00000000000000000000002 /* root */;
+			mainGroup = A00000000000000000000002;
 			productRefGroup = A0000000000000000000000D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				A00000000000000000000006 /* LifePilot */,
+				E00000000000000000000001 /* LifePilotTests */,
 			);
 		};
 /* End PBXProject section */
@@ -187,10 +264,29 @@
 				D00000000000000000000009 /* QuoteService.swift in Sources */,
 				D0000000000000000000000A /* SoundManager.swift in Sources */,
 				D0000000000000000000000B /* Color+Hex.swift in Sources */,
+				D0000000000000000000000D /* TodayViewModel.swift in Sources */,
+				D0000000000000000000000E /* HabitListViewModel.swift in Sources */,
+				D0000000000000000000000F /* StatsViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E00000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E00000000000000000000005 /* HabitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E0000000000000000000000B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A00000000000000000000006 /* LifePilot */;
+			targetProxy = E0000000000000000000000C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A00000000000000000000004 /* Debug */ = {
@@ -250,6 +346,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -306,6 +403,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
@@ -370,6 +468,44 @@
 			};
 			name = Release;
 		};
+		E00000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anuj.LifePilotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LifePilot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LifePilot";
+			};
+			name = Debug;
+		};
+		E0000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anuj.LifePilotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LifePilot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LifePilot";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -387,6 +523,15 @@
 			buildConfigurations = (
 				A00000000000000000000008 /* Debug */,
 				A00000000000000000000009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E00000000000000000000008 /* Build configuration list for PBXNativeTarget "LifePilotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E00000000000000000000009 /* Debug */,
+				E0000000000000000000000A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

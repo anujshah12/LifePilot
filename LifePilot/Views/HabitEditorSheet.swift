@@ -3,6 +3,7 @@ import SwiftData
 
 /// Sheet for creating a new habit or editing an existing one.
 /// Supports name, icon, color, frequency, and custom day selection.
+/// All data mutations are routed through HabitListViewModel.
 struct HabitEditorSheet: View {
 
     enum Mode: Identifiable {
@@ -18,10 +19,13 @@ struct HabitEditorSheet: View {
     }
 
     let mode: Mode
+    /// ViewModel that handles all CRUD operations as gatekeeper to the Model.
+    let viewModel: HabitListViewModel
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
+    @State private var showDeleteConfirmation = false
     @State private var name = ""
     @State private var icon = "circle.fill"
     @State private var colorHex = "007AFF"
@@ -138,6 +142,21 @@ struct HabitEditorSheet: View {
                         .padding(.vertical, 4)
                     }
                 }
+
+                // Delete button (only in edit mode)
+                if isEditing {
+                    Section {
+                        Button(role: .destructive) {
+                            showDeleteConfirmation = true
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Label("Delete Habit", systemImage: "trash")
+                                Spacer()
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle(isEditing ? "Edit Habit" : "New Habit")
             .navigationBarTitleDisplayMode(.inline)
@@ -152,6 +171,17 @@ struct HabitEditorSheet: View {
                 }
             }
             .onAppear { loadExistingValues() }
+            .confirmationDialog("Delete Habit", isPresented: $showDeleteConfirmation) {
+                Button("Delete", role: .destructive) {
+                    if case .edit(let habit) = mode {
+                        // Route deletion through the ViewModel
+                        viewModel.deleteHabit(habit, context: modelContext)
+                    }
+                    dismiss()
+                }
+            } message: {
+                Text("Are you sure? This will permanently delete this habit and all its completion history.")
+            }
         }
     }
 
@@ -167,27 +197,23 @@ struct HabitEditorSheet: View {
         }
     }
 
+    /// Saves the habit by routing through the ViewModel (gatekeeper pattern).
     private func save() {
         let trimmed = name.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
 
         switch mode {
         case .add:
-            let habit = Habit(
-                name: trimmed,
-                icon: icon,
-                colorHex: colorHex,
-                frequency: frequency,
-                customDays: Array(customDays).sorted()
+            viewModel.addHabit(
+                name: trimmed, icon: icon, colorHex: colorHex,
+                frequency: frequency, customDays: Array(customDays).sorted(),
+                context: modelContext
             )
-            modelContext.insert(habit)
-
         case .edit(let habit):
-            habit.name = trimmed
-            habit.icon = icon
-            habit.colorHex = colorHex
-            habit.frequency = frequency
-            habit.customDays = Array(customDays).sorted()
+            viewModel.updateHabit(
+                habit, name: trimmed, icon: icon, colorHex: colorHex,
+                frequency: frequency, customDays: Array(customDays).sorted()
+            )
         }
 
         dismiss()

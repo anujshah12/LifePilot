@@ -2,48 +2,29 @@ import SwiftUI
 import SwiftData
 
 /// Main daily checklist: shows habits scheduled for today with toggle completion.
-/// Displays a motivational quote from the ZenQuotes API at the top.
+/// Delegates all business logic to TodayViewModel.
 struct TodayView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Habit.createdAt) private var allHabits: [Habit]
 
-    // Quote from ZenQuotes API (networking + concurrency requirement)
-    private var quoteService = QuoteService.shared
-
-    // Triggers re-evaluation of completion state after toggling
-    @State private var refreshTick = 0
-
-    // Celebration state for completing all habits
-    @State private var showCelebration = false
-
-    /// Only habits scheduled for today.
-    private var todaysHabits: [Habit] {
-        allHabits.filter { $0.isScheduled(for: Date()) }
-    }
-
-    private var completedCount: Int {
-        todaysHabits.filter { $0.isCompleted(on: Date()) }.count
-    }
-
-    private var allDone: Bool {
-        !todaysHabits.isEmpty && completedCount == todaysHabits.count
-    }
+    /// ViewModel handles toggle logic, celebration state, and quote fetching.
+    @State private var viewModel = TodayViewModel()
 
     var body: some View {
         NavigationStack {
             ZStack {
                 List {
-                    // Motivational quote section (API-driven)
+                    // Motivational quote section (API-driven via QuoteService)
                     quoteSection
 
                     // Progress summary
-                    if !todaysHabits.isEmpty {
+                    if !viewModel.todaysHabits(from: allHabits).isEmpty {
                         progressSection
                     }
 
                     // Habit checklist
-                    if todaysHabits.isEmpty {
+                    if viewModel.todaysHabits(from: allHabits).isEmpty {
                         Section {
                             ContentUnavailableView(
                                 "No Habits Scheduled",
@@ -53,9 +34,15 @@ struct TodayView: View {
                         }
                     } else {
                         Section("Today's Habits") {
-                            ForEach(todaysHabits) { habit in
+                            ForEach(viewModel.todaysHabits(from: allHabits)) { habit in
                                 HabitCheckRow(habit: habit) {
-                                    toggleHabit(habit)
+                                    // Animation lives in the View; logic lives in the ViewModel
+                                    let celebrate = viewModel.toggleHabit(habit, allHabits: allHabits, context: modelContext)
+                                    if celebrate {
+                                        withAnimation(.spring(response: 0.4)) {
+                                            viewModel.showCelebration = true
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -64,19 +51,21 @@ struct TodayView: View {
                 .listStyle(.insetGrouped)
 
                 // Celebration overlay when all habits are done
-                if showCelebration {
+                if viewModel.showCelebration {
                     CelebrationOverlay()
                         .onAppear {
-                            // Auto-dismiss after 2 seconds
+                            // Auto-dismiss after 2 seconds with animation (View concern)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation { showCelebration = false }
+                                withAnimation {
+                                    viewModel.dismissCelebration()
+                                }
                             }
                         }
                 }
             }
             .navigationTitle("Today")
             .task {
-                await quoteService.fetchDailyQuote()
+                await viewModel.loadQuote()
             }
         }
     }
@@ -85,16 +74,16 @@ struct TodayView: View {
 
     private var quoteSection: some View {
         Section {
-            if quoteService.isLoading {
+            if viewModel.quoteService.isLoading {
                 HStack { Spacer(); ProgressView(); Spacer() }
-            } else if !quoteService.quoteText.isEmpty {
+            } else if !viewModel.quoteService.quoteText.isEmpty {
                 VStack(spacing: 6) {
-                    Text(quoteService.quoteText)
+                    Text(viewModel.quoteService.quoteText)
                         .font(.subheadline)
                         .italic()
                         .multilineTextAlignment(.center)
 
-                    Text("-- \(quoteService.quoteAuthor)")
+                    Text("-- \(viewModel.quoteService.quoteAuthor)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -107,58 +96,28 @@ struct TodayView: View {
     // MARK: - Progress Section
 
     private var progressSection: some View {
-        Section {
-            VStack(spacing: 8) {
-                ProgressView(value: Double(completedCount), total: Double(todaysHabits.count))
-                    .tint(allDone ? .green : .blue)
+        let completed = viewModel.completedCount(from: allHabits)
+        let total = viewModel.todaysHabits(from: allHabits).count
+        let done = viewModel.allDone(from: allHabits)
 
-                Text("\(completedCount) of \(todaysHabits.count) complete")
+        return Section {
+            VStack(spacing: 8) {
+                ProgressView(value: Double(completed), total: Double(total))
+                    .tint(done ? .green : .blue)
+
+                Text("\(completed) of \(total) complete")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
             .padding(.vertical, 4)
         }
     }
-
-    // MARK: - Toggle Logic
-
-    private func toggleHabit(_ habit: Habit) {
-        let today = Date()
-
-        if habit.isCompleted(on: today) {
-            // Uncheck: remove today's completion
-            if let completion = habit.completions.first(where: {
-                Calendar.current.isDate($0.date, inSameDayAs: today)
-            }) {
-                modelContext.delete(completion)
-                habit.completions.removeAll { $0.id == completion.id }
-                SoundManager.shared.playUncheckSound()
-            }
-        } else {
-            // Check: add a completion for today
-            let completion = HabitCompletion(date: today)
-            completion.habit = habit
-            habit.completions.append(completion)
-            SoundManager.shared.playCheckSound()
-
-            // Check if all habits are now done
-            let nowComplete = todaysHabits.filter { $0.isCompleted(on: today) }.count + 1
-            if nowComplete == todaysHabits.count {
-                SoundManager.shared.playAllCompleteSound()
-                withAnimation(.spring(response: 0.4)) {
-                    showCelebration = true
-                }
-            }
-        }
-
-        refreshTick += 1
-    }
 }
 
 // MARK: - Habit Check Row
 
 /// A single habit row with a tappable checkbox, name, streak badge, and icon.
-private struct HabitCheckRow: View {
+struct HabitCheckRow: View {
     let habit: Habit
     let onToggle: () -> Void
 
@@ -169,7 +128,7 @@ private struct HabitCheckRow: View {
     var body: some View {
         Button(action: onToggle) {
             HStack(spacing: 14) {
-                // Checkbox
+                // Checkbox icon
                 Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
                     .foregroundStyle(isDone ? Color(hex: habit.colorHex) : .gray)
@@ -210,7 +169,7 @@ private struct HabitCheckRow: View {
 // MARK: - Celebration Overlay
 
 /// Full-screen animated overlay shown when all habits are completed for the day.
-private struct CelebrationOverlay: View {
+struct CelebrationOverlay: View {
     @State private var animate = false
 
     var body: some View {

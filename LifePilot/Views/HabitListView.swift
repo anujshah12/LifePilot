@@ -1,14 +1,15 @@
 import SwiftUI
 import SwiftData
 
-/// Manages the user's habit collection: add, edit, reorder, and delete habits.
+/// Manages the user's habit collection: add, edit, and delete habits.
+/// Delegates data operations to HabitListViewModel.
 struct HabitListView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Habit.createdAt) private var habits: [Habit]
 
-    @State private var showAddSheet = false
-    @State private var habitToEdit: Habit?
+    /// ViewModel handles CRUD operations and sheet state.
+    @State private var viewModel = HabitListViewModel()
 
     var body: some View {
         NavigationStack {
@@ -19,7 +20,7 @@ struct HabitListView: View {
                     } description: {
                         Text("Tap + to add your first habit.")
                     } actions: {
-                        Button("Add Habit") { showAddSheet = true }
+                        Button("Add Habit") { viewModel.showAddSheet = true }
                             .buttonStyle(.borderedProminent)
                     }
                 } else {
@@ -27,9 +28,11 @@ struct HabitListView: View {
                         ForEach(habits) { habit in
                             HabitRow(habit: habit)
                                 .contentShape(Rectangle())
-                                .onTapGesture { habitToEdit = habit }
+                                .onTapGesture { viewModel.habitToEdit = habit }
                         }
-                        .onDelete(perform: deleteHabits)
+                        .onDelete { offsets in
+                            viewModel.deleteHabits(at: offsets, from: habits, context: modelContext)
+                        }
                     }
                     .listStyle(.insetGrouped)
                 }
@@ -37,23 +40,17 @@ struct HabitListView: View {
             .navigationTitle("Habits")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button { showAddSheet = true } label: {
+                    Button { viewModel.showAddSheet = true } label: {
                         Image(systemName: "plus")
                     }
                 }
             }
-            .sheet(isPresented: $showAddSheet) {
-                HabitEditorSheet(mode: .add)
+            .sheet(isPresented: $viewModel.showAddSheet) {
+                HabitEditorSheet(mode: .add, viewModel: viewModel)
             }
-            .sheet(item: $habitToEdit) { habit in
-                HabitEditorSheet(mode: .edit(habit))
+            .sheet(item: $viewModel.habitToEdit) { habit in
+                HabitEditorSheet(mode: .edit(habit), viewModel: viewModel)
             }
-        }
-    }
-
-    private func deleteHabits(at offsets: IndexSet) {
-        for index in offsets {
-            modelContext.delete(habits[index])
         }
     }
 }
@@ -61,7 +58,7 @@ struct HabitListView: View {
 // MARK: - Habit Row
 
 /// Displays a habit's icon, name, frequency, and current streak in the list.
-private struct HabitRow: View {
+struct HabitRow: View {
     let habit: Habit
 
     var body: some View {

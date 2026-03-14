@@ -70,6 +70,38 @@ final class Habit {
         return completions.contains { cal.isDate($0.date, inSameDayAs: date) }
     }
 
+    // MARK: - Mutations
+
+    /// Marks this habit as completed for the given date.
+    /// Creates a new HabitCompletion record and appends it to completions.
+    func markComplete(on date: Date) {
+        guard !isCompleted(on: date) else { return }
+        let completion = HabitCompletion(date: date)
+        completion.habit = self
+        completions.append(completion)
+    }
+
+    /// Removes the completion record for the given date, if one exists.
+    /// Returns the removed completion so the caller can delete it from the context.
+    @discardableResult
+    func markIncomplete(on date: Date) -> HabitCompletion? {
+        guard let completion = completions.first(where: {
+            Calendar.current.isDate($0.date, inSameDayAs: date)
+        }) else { return nil }
+        completions.removeAll { $0.id == completion.id }
+        return completion
+    }
+
+    /// Updates this habit's editable properties.
+    func update(name: String, icon: String, colorHex: String,
+                frequency: HabitFrequency, customDays: [Int]) {
+        self.name = name
+        self.icon = icon
+        self.colorHex = colorHex
+        self.frequency = frequency
+        self.customDays = customDays
+    }
+
     // MARK: - Streak computation
 
     /// Current consecutive-day streak ending today (or yesterday if today isn't done yet).
