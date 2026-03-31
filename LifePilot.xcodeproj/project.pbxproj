@@ -23,6 +23,13 @@
 		D0000000000000000000000E /* HabitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000E /* HabitListViewModel.swift */; };
 		D0000000000000000000000F /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000000000000000000000F /* StatsViewModel.swift */; };
 		E00000000000000000000005 /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000004 /* HabitTests.swift */; };
+		G00000000000000000000001 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000001 /* SupabaseService.swift */; };
+		G00000000000000000000002 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000002 /* AuthViewModel.swift */; };
+		G00000000000000000000003 /* QuotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000003 /* QuotesViewModel.swift */; };
+		G00000000000000000000004 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000004 /* AuthView.swift */; };
+		G00000000000000000000005 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000005 /* ProfileView.swift */; };
+		G00000000000000000000006 /* QuoteFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000006 /* QuoteFeedView.swift */; };
+		G00000000000000000000007 /* CommentsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000007 /* CommentsSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +61,13 @@
 		C0000000000000000000000F /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 		E00000000000000000000002 /* LifePilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifePilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E00000000000000000000004 /* HabitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTests.swift; sourceTree = "<group>"; };
+		F00000000000000000000001 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		F00000000000000000000002 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		F00000000000000000000003 /* QuotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewModel.swift; sourceTree = "<group>"; };
+		F00000000000000000000004 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		F00000000000000000000005 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F00000000000000000000006 /* QuoteFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteFeedView.swift; sourceTree = "<group>"; };
+		F00000000000000000000007 /* CommentsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +137,10 @@
 				C00000000000000000000006 /* HabitListView.swift */,
 				C00000000000000000000007 /* HabitEditorSheet.swift */,
 				C00000000000000000000008 /* StatsView.swift */,
+				F00000000000000000000004 /* AuthView.swift */,
+				F00000000000000000000005 /* ProfileView.swift */,
+				F00000000000000000000006 /* QuoteFeedView.swift */,
+				F00000000000000000000007 /* CommentsSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -133,6 +151,8 @@
 				C0000000000000000000000D /* TodayViewModel.swift */,
 				C0000000000000000000000E /* HabitListViewModel.swift */,
 				C0000000000000000000000F /* StatsViewModel.swift */,
+				F00000000000000000000002 /* AuthViewModel.swift */,
+				F00000000000000000000003 /* QuotesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -142,6 +162,7 @@
 			children = (
 				C00000000000000000000009 /* QuoteService.swift */,
 				C0000000000000000000000A /* SoundManager.swift */,
+				F00000000000000000000001 /* SupabaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -267,6 +288,13 @@
 				D0000000000000000000000D /* TodayViewModel.swift in Sources */,
 				D0000000000000000000000E /* HabitListViewModel.swift in Sources */,
 				D0000000000000000000000F /* StatsViewModel.swift in Sources */,
+				G00000000000000000000001 /* SupabaseService.swift in Sources */,
+				G00000000000000000000002 /* AuthViewModel.swift in Sources */,
+				G00000000000000000000003 /* QuotesViewModel.swift in Sources */,
+				G00000000000000000000004 /* AuthView.swift in Sources */,
+				G00000000000000000000005 /* ProfileView.swift in Sources */,
+				G00000000000000000000006 /* QuoteFeedView.swift in Sources */,
+				G00000000000000000000007 /* CommentsSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
