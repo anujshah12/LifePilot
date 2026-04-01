@@ -115,6 +115,36 @@ final class SupabaseService {
         )
     }
 
+    func refreshSession() async throws {
+        guard let refresh = refreshToken else { throw SupabaseError.notAuthenticated }
+        let url = URL(string: "\(SupabaseConfig.projectURL)/auth/v1/token?grant_type=refresh_token")!
+        let body: [String: String] = ["refresh_token": refresh]
+        let response: AuthResponse = try await post(url: url, body: body, authenticated: false)
+        saveSession(
+            access: response.access_token,
+            refresh: response.refresh_token,
+            userId: response.user.id,
+            email: response.user.email ?? currentUserEmail ?? ""
+        )
+    }
+
+    private func validToken() async throws -> String {
+        guard let token = accessToken else { throw SupabaseError.notAuthenticated }
+        return token
+    }
+
+    private func tokenRefreshingOnUnauthorized() async throws -> String {
+        guard accessToken != nil else { throw SupabaseError.notAuthenticated }
+        do {
+            try await refreshSession()
+        } catch {
+            clearSession()
+            throw SupabaseError.notAuthenticated
+        }
+        guard let token = accessToken else { throw SupabaseError.notAuthenticated }
+        return token
+    }
+
     func signOut() async {
         if let token = accessToken {
             let url = URL(string: "\(SupabaseConfig.projectURL)/auth/v1/logout")!
@@ -151,7 +181,7 @@ final class SupabaseService {
         return record
     }
 
-    func deleteBookmark(id: String) async throws {
+    func deleteBookmark(id: String, isRetry: Bool = false) async throws {
         guard let token = accessToken else { throw SupabaseError.notAuthenticated }
         let url = URL(string: "\(SupabaseConfig.projectURL)/rest/v1/bookmarks?id=eq.\(id)")!
         var request = URLRequest(url: url)
@@ -159,7 +189,13 @@ final class SupabaseService {
         request.setValue(SupabaseConfig.anonKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         let (_, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+        let http = response as? HTTPURLResponse
+        if http?.statusCode == 401, !isRetry {
+            _ = try await tokenRefreshingOnUnauthorized()
+            try await deleteBookmark(id: id, isRetry: true)
+            return
+        }
+        guard let status = http, (200...299).contains(status.statusCode) else {
             throw SupabaseError.serverError
         }
     }
@@ -215,7 +251,15 @@ final class SupabaseService {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+        let http = response as? HTTPURLResponse
+
+        // Auto-refresh token on 401 and retry once
+        if http?.statusCode == 401, !useAnonAsBearer {
+            let newToken = try await tokenRefreshingOnUnauthorized()
+            return try await get(url: url, token: newToken, useAnonAsBearer: false)
+        }
+
+        guard let status = http, (200...299).contains(status.statusCode) else {
             throw SupabaseError.serverError
         }
         return try JSONDecoder().decode(T.self, from: data)
@@ -229,13 +273,12 @@ final class SupabaseService {
         request.httpBody = try JSONEncoder().encode(body)
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
-            let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw SupabaseError.apiError(errorBody)
+            throw SupabaseError.apiError("")
         }
         return try JSONDecoder().decode(T.self, from: data)
     }
 
-    private func post<T: Decodable>(url: URL, body: [String: String], token: String) async throws -> T {
+    private func post<T: Decodable>(url: URL, body: [String: String], token: String, isRetry: Bool = false) async throws -> T {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -244,9 +287,16 @@ final class SupabaseService {
         request.setValue("return=representation", forHTTPHeaderField: "Prefer")
         request.httpBody = try JSONEncoder().encode(body)
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
-            let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw SupabaseError.apiError(errorBody)
+        let http = response as? HTTPURLResponse
+
+        // Auto-refresh token on 401 and retry once
+        if http?.statusCode == 401, !isRetry {
+            let newToken = try await tokenRefreshingOnUnauthorized()
+            return try await post(url: url, body: body, token: newToken, isRetry: true)
+        }
+
+        guard let status = http, (200...299).contains(status.statusCode) else {
+            throw SupabaseError.apiError("")
         }
         return try JSONDecoder().decode(T.self, from: data)
     }
@@ -294,9 +344,9 @@ enum SupabaseError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notAuthenticated: return "You must be logged in."
-        case .serverError: return "Server error. Try again later."
-        case .noData: return "No data returned."
-        case .apiError(let msg): return msg
+        case .serverError: return "Something went wrong. Please try again."
+        case .noData: return "Something went wrong. Please try again."
+        case .apiError: return "Something went wrong. Please try again."
         }
     }
 }

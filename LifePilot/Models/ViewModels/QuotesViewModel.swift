@@ -43,14 +43,13 @@ final class QuotesViewModel {
         }
         errorMessage = nil
         if isCurrentQuoteBookmarked {
-            // Find and remove the bookmark
             if let bookmark = bookmarks.first(where: { $0.quote_text == quoteText }) {
                 do {
                     try await supabase.deleteBookmark(id: bookmark.id)
                     bookmarks.removeAll { $0.id == bookmark.id }
                     isCurrentQuoteBookmarked = false
                 } catch {
-                    errorMessage = error.localizedDescription
+                    errorMessage = "Could not remove bookmark. Please try again."
                 }
             }
         } else {
@@ -59,7 +58,7 @@ final class QuotesViewModel {
                 bookmarks.insert(record, at: 0)
                 isCurrentQuoteBookmarked = true
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = "Could not save bookmark. Please try again."
             }
         }
     }
@@ -70,7 +69,7 @@ final class QuotesViewModel {
         do {
             bookmarks = try await supabase.fetchBookmarks()
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = "Could not load bookmarks. Please try again."
         }
         isLoadingBookmarks = false
     }
@@ -84,7 +83,7 @@ final class QuotesViewModel {
                 isCurrentQuoteBookmarked = false
             }
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = "Could not delete bookmark. Please try again."
         }
     }
 
@@ -109,7 +108,7 @@ final class QuotesViewModel {
         do {
             comments = try await supabase.fetchComments(quoteText: quoteText, quoteAuthor: quoteAuthor)
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = "Could not load comments. Please try again."
         }
         isLoadingComments = false
     }
@@ -132,7 +131,7 @@ final class QuotesViewModel {
             comments.insert(record, at: 0)
             newCommentText = ""
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = "Could not post comment. Please try again."
         }
     }
 
